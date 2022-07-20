@@ -16,7 +16,13 @@ unsafe = true
   page_schemas = []
   seo = []
 
+[[params.social]]
+name = "Twitter"
+icon = "twitter"
+url = "https://twitter.com/VisaLimbo"
+
 [taxonomies]
+
 
 [privacy]
   [privacy.googleAnalytics]
