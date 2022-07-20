@@ -1,8 +1,6 @@
 ---
 author: "parthkhare"
 date: 2022-07-15T21:13:14-05:00
-# categories: ["R"]
-# tags: ["Immigration", "Visa", "Embassy"]
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
@@ -10,15 +8,11 @@ library(data.table);library(readxl);library(ggplot2); library(countrycode)
 scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/visascraped_base_mapped.csv')
 ```
 
+
 <center>
 ![](https://i.ibb.co/bzDkHM7/Dali-2.png){width=100%}
 </center>
 
-<!-- https://i.ibb.co/Br4VsWk/Dali-limbo.png -->
-
-<!-- <center> -->
-<!-- #### Live tracking the longest visa appointment wait times at US consultates -->
-<!-- </center> -->
 
 July 15th, 2022
 
@@ -51,7 +45,7 @@ ggplot(scpdt_base[scpdt_base$VisitorVisa>400,], aes(y=reorder(Embassy,VisitorVis
         axis.title.y = element_blank())
 
 ```
-[Source:State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
+[Source-State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
 \
 \
 \
@@ -75,7 +69,7 @@ ggplot(scpdt_base[scpdt_base$Student_ExchangeVisitorVisas>60,], aes(y=reorder(Em
   theme(axis.text=element_text(size=rel(0.7)),
         axis.title.y = element_blank())
 ```
-[Source:State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
+[Source-State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
 \
 \
 \
@@ -104,7 +98,7 @@ ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Emba
   theme(axis.text=element_text(size=rel(0.7)),
         axis.title.y = element_blank())
 ```
-[Source:State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
+[Source-State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
 \
 \
 \
