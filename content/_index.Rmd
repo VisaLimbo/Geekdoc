@@ -21,9 +21,26 @@ July 15th, 2022
 
 <!-- Based on State Department [data](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html), the following post analyses visa wait times for 237 embassies across 172 countries. There results are shown for three categories, Visitor Visa, Student/Exchange Visitor Visas and All Other Non-immigrant visa.  -->
 
+```{r, echo=F}
+vismn <- function() {
+  cat(round(mean(scpdt_base$VisitorVisa, na.rm=T),0))
+}
+stumn <- function() {
+  cat(round(mean(scpdt_base$Student_ExchangeVisitorVisas, na.rm=T),0))
+}
+nonmn <- function() {
+  cat(round(mean(scpdt_base$AllOtherNonimmigrantVisas, na.rm=T),0))
+}
+```
+
+
 
 #### Visitor Visa
-Average Wait: 237 days 
+Average Wait: 
+```{r  echo=F, results = "asis"}
+vismn()
+```
+days 
 
 Longest Waits
 ```{r, echo=FALSE, warning=FALSE, message=F}
@@ -40,7 +57,7 @@ scpdt_base <- data.table(scpdt_base)
 ggplot(scpdt_base[scpdt_base$VisitorVisa>400,], aes(y=reorder(Embassy,VisitorVisa), 
                                                   x=VisitorVisa)) +
   geom_bar(fill='red',stat='identity') +  
-  theme_minimal() + ylab('') + xlab('days') +
+  theme_minimal() + xlab('days') +
   theme(axis.text=element_text(size=rel(0.7)),
         axis.title.y = element_blank())
 
@@ -54,7 +71,11 @@ ggplot(scpdt_base[scpdt_base$VisitorVisa>400,], aes(y=reorder(Embassy,VisitorVis
 
 
 #### Student/Exchange Visitor Visas
-Average Wait: 46 days
+Average Wait: 
+```{r  echo=F, results = "asis"}
+stumn()
+```
+ days
 
 Longest Waits
 ```{r scpdt_base, echo=FALSE, warning=FALSE, message=F}
@@ -79,14 +100,14 @@ ggplot(scpdt_base[scpdt_base$Student_ExchangeVisitorVisas>60,], aes(y=reorder(Em
 
 
 #### All Other Non-immigrant Visas
-Average Wait: 68 days
+Average Wait: 
+```{r  echo=F, results = "asis"}
+nonmn()
+```
+days
 
 Longest Waits
 ```{r, echo=FALSE, warning=FALSE, message=F}
-# Scraped Data Stats
-# --------------
-
-
 # ----------------------------------------
 # Charts for all visa types separately
 # ----------------------------------------
@@ -105,6 +126,10 @@ ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Emba
 
 
 
-Questions?
-Contact: visalimbo@gmail.com
+Questions?\
+Contact: visalimbo@gmail.com\
+[Twitter](https://twitter.com/VisaLimbo)
+
+
+
 
