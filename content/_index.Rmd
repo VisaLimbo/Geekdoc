@@ -11,20 +11,30 @@ knitr::opts_chunk$set(collapse = TRUE)
 library(data.table);library(readxl);library(ggplot2); library(countrycode)
 ```
 
+The longest visa appointment wait times at US consultates
+
 
 <center>
 ![](https://i.ibb.co/QK5jyQp/Dali-limbo.png){width=30%}
 </center>
 
-### Visa wait times
-Coivd lockdowns are more or less over. With almost 70% of global population [vaccinated](%22https://www.nytimes.com/interactive/2021/world/covid-vaccinations-tracker.html%22), most countries have opened their borders. But can anyone really travel ? The waiting times to get any category of visa is unimaginably long. 
-
-Based on State Department [data](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html), the following post analyses visa wait times for 237 embassies across 172 countries. There results are shown for three categories, Visitor Visa, Student/Exchange Visitor Visas and All Other Non-immigrant visa. 
 
 
-Delay for Visitor visas is the highest, based on July, 2022 average delay is around 237 days. 
+<!-- ### Visa wait times -->
+<!-- Coivd lockdowns are more or less over. With almost 70% of global population [vaccinated](%22https://www.nytimes.com/interactive/2021/world/covid-vaccinations-tracker.html%22), most countries have opened their borders. But can anyone really travel ? The waiting times to get any category of visa is unimaginably long.  -->
+
+<!-- Based on State Department [data](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html), the following post analyses visa wait times for 237 embassies across 172 countries. There results are shown for three categories, Visitor Visa, Student/Exchange Visitor Visas and All Other Non-immigrant visa.  -->
+
 
 ## Visitor Visa
+
+Delay for Visitor visas is the highest, averaging around
+```{r, echo=FALSE, warning=FALSE}
+scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/visascraped_base_mapped.csv')
+round(mean(scpdt_base$VisitorVisa, na.rm=T),1)
+```
+days
+
 ```{r, echo=FALSE, warning=FALSE, message=F}
 # Scraped Data Stats
 # --------------
