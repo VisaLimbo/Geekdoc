@@ -1,5 +1,5 @@
 ---
-title: "VisaLimbo"
+title: "Visa Limbo"
 author: "parthkhare"
 date: 2022-07-15T21:13:14-05:00
 # categories: ["R"]
@@ -22,8 +22,9 @@ Coivd lockdowns are more or less over. With almost 70% of global population [vac
 Based on State Department [data](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html), the following post analyses visa wait times for 237 embassies across 172 countries. There results are shown for three categories, Visitor Visa, Student/Exchange Visitor Visas and All Other Non-immigrant visa. 
 
 
-Delay for Visitor visas is the highest, based on July, 2022 average delay is around 237 days. Following embassies currently have visitor's visa wait time for over 1 year
+Delay for Visitor visas is the highest, based on July, 2022 average delay is around 237 days. 
 
+## Visitor Visa
 ```{r, echo=FALSE, warning=FALSE, message=F}
 # Scraped Data Stats
 # --------------
@@ -36,15 +37,19 @@ scpdt_base$ctyname <- countrycode(scpdt_base$Country, origin = 'iso3c', destinat
 # Charts for all visa types separately
 # ----------------------------------------
 # Visitor Visa more than one year
-ggplot(scpdt_base[scpdt_base$VisitorVisa>365,], aes(y=reorder(Embassy,VisitorVisa), 
+ggplot(scpdt_base[scpdt_base$VisitorVisa>400,], aes(y=reorder(Embassy,VisitorVisa), 
                                                   x=VisitorVisa)) +
-  geom_bar(fill='red',stat='identity') + ggtitle("Visitor Visa > 1 year") +  
-  theme_minimal() + ylab('Emabssy') + xlab('Waitime (days)') +
-  theme(axis.text=element_text(size=rel(0.7)))
+  geom_bar(fill='red',stat='identity') +  
+  theme_minimal() + ylab('') + xlab('Waitime (days)') +
+  theme(axis.text=element_text(size=rel(0.7)),
+        axis.title.y = element_blank())
 
 ```
+[Source:State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
 
-Average delay for Student/Exchange Visitor Visas is 46 days, following are the embassies with maximum lags
+
+## Student/Exchange Visitor Visas
+Average delay: 46 days, following are the embassies with maximum lags
 ```{r scpdt_base, echo=FALSE, warning=FALSE, message=F}
 
 # Charts for all visa types separately
@@ -52,10 +57,12 @@ Average delay for Student/Exchange Visitor Visas is 46 days, following are the e
 # Visitor Visa more than one year
 ggplot(scpdt_base[scpdt_base$Student_ExchangeVisitorVisas>60,], aes(y=reorder(Embassy,Student_ExchangeVisitorVisas), 
                                                   x=Student_ExchangeVisitorVisas)) +
-  geom_bar(fill='darkgreen',stat='identity') + ggtitle("Student/Exchange Visitor Visas") +  
-  theme_minimal() + ylab('Emabssy') + xlab('Waitime (days)') +
-  theme(axis.text=element_text(size=rel(0.7)))
+  geom_bar(fill='darkgreen',stat='identity') +   
+  theme_minimal() + ylab('') + xlab('Waitime (days)') +
+  theme(axis.text=element_text(size=rel(0.7)),
+        axis.title.y = element_blank())
 ```
+[Source:State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
 
 
 
@@ -71,10 +78,12 @@ Average delay for All Other Non-immigrant Visas is 68 days, following are countr
 # Visitor Visa more than one year
 ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Embassy,AllOtherNonimmigrantVisas), 
                                                   x=AllOtherNonimmigrantVisas)) +
-  geom_bar(fill='darkblue',stat='identity') + ggtitle("All Other Nonimmigrant Visas") +  
-  theme_minimal() + ylab('Emabssy') + xlab('Waitime (days)') +
-  theme(axis.text=element_text(size=rel(0.7)))
+  geom_bar(fill='darkblue',stat='identity') +   
+  theme_minimal() + ylab('') + xlab('Waitime (days)') +
+  theme(axis.text=element_text(size=rel(0.7)),
+        axis.title.y = element_blank())
 ```
+[Source:State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
 
 
 
