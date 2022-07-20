@@ -67,6 +67,7 @@ ggplot(scpdt_base[scpdt_base$Student_ExchangeVisitorVisas>60,], aes(y=reorder(Em
 
 
 Average delay for All Other Non-immigrant Visas is 68 days, following are countries with longest delays
+
 ```{r, echo=FALSE, warning=FALSE, message=F}
 # Scraped Data Stats
 # --------------
