@@ -85,7 +85,7 @@ ggplot(scpdt_base[scpdt_base$Student_ExchangeVisitorVisas>60,], aes(y=reorder(Em
 
 
 #### All Other Non-immigrant Visas
-Average Wait:68 days
+Average Wait: 68 days
 
 Longest Waits
 ```{r, echo=FALSE, warning=FALSE, message=F}
