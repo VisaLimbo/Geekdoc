@@ -11,6 +11,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 library(data.table);library(readxl);library(ggplot2); library(countrycode)
 ```
 
+
 The longest visa appointment wait times at US consultates
 
 
@@ -27,6 +28,7 @@ The longest visa appointment wait times at US consultates
 
 
 ## Visitor Visa
+### Date: July 15th, 2022
 
 Delay for Visitor visas is the highest, averaging around
 ```{r, echo=FALSE, warning=FALSE}
@@ -41,7 +43,6 @@ days
 scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/visascraped_base_mapped.csv')
 scpdt_base$X <- NULL
 scpdt_base <- data.table(scpdt_base)
-scpdt_base$ctyname <- countrycode(scpdt_base$Country, origin = 'iso3c', destination = 'country.name')
 
 # ----------------------------------------
 # Charts for all visa types separately
