@@ -18,14 +18,9 @@ unsafe = true
 
 [[menu.main]]
   name = "Twitter"
-  icon = "icon-twitter"
+  icon = "twitter"
   url = "https://twitter.com/VisaLimbo"
   weight = -5
-
-[[params.socialIcons]]
-  icon = "fa-linkedin"
-  title = "Linkedin"
-  url = "#"
 
 [taxonomies]
 

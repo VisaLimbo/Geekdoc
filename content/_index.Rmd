@@ -1,7 +1,9 @@
 ---
 author: "parthkhare"
 date: 2022-07-15T21:13:14-05:00
+show_social_links: true # specify social accounts in site config
 ---
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 library(data.table);library(readxl);library(ggplot2); library(countrycode)
