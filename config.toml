@@ -15,6 +15,7 @@ unsafe = true
   schemas = []
   page_schemas = []
   seo = []
+  body_classes = "avenir bg-near-white"
 
 [[params.social]]
 name = "Twitter"
