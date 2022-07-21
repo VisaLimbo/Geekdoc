@@ -30,6 +30,7 @@ nonmn <- function() {
 
 
 
+
 #### Visitor Visa
 Average Wait: 
 ```{r  echo=F, results = "asis"}
@@ -57,7 +58,7 @@ ggplot(scpdt_base[scpdt_base$VisitorVisa>400,], aes(y=reorder(Embassy,VisitorVis
         axis.title.y = element_blank())
 
 ```
-[Source-State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
+[Source-State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html){target="_blank"}
 \
 \
 \
@@ -85,7 +86,7 @@ ggplot(scpdt_base[scpdt_base$Student_ExchangeVisitorVisas>60,], aes(y=reorder(Em
   theme(axis.text=element_text(size=rel(0.7)),
         axis.title.y = element_blank())
 ```
-[Source-State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
+[Source-State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html){target="_blank"}
 \
 \
 \
@@ -114,7 +115,7 @@ ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Emba
   theme(axis.text=element_text(size=rel(0.7)),
         axis.title.y = element_blank())
 ```
-[Source-State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html)
+[Source-State Department](https://travel.state.gov/content/travel/en/us-visas/visa-information-resources/wait-times.html){target="_blank"}
 \
 \
 \
@@ -123,7 +124,7 @@ ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Emba
 
 Questions?\
 Contact: visalimbo@gmail.com\
-[Twitter](https://twitter.com/VisaLimbo)
+[Twitter](https://twitter.com/VisaLimbo){target="_blank"}
 
 
 
