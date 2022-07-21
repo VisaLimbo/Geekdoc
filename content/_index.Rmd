@@ -7,11 +7,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 library(data.table);library(readxl);library(ggplot2); library(countrycode)
 scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/visascraped_base_mapped.csv')
 ```
-
-
-<center>
 ![](https://i.ibb.co/4J4nv22/Dali-4.png){width=100%}
-</center>
 
 July 15th, 2022
 
@@ -124,7 +120,6 @@ ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Emba
 Questions?\
 Contact: visalimbo@gmail.com\
 [Twitter](https://twitter.com/VisaLimbo){target="_blank"}
-
 
 
 

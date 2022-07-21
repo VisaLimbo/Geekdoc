@@ -15,12 +15,17 @@ unsafe = true
   schemas = []
   page_schemas = []
   seo = []
-  body_classes = "avenir bg-near-white"
 
-[[params.social]]
-name = "Twitter"
-icon = "twitter"
-url = "https://twitter.com/VisaLimbo"
+[[menu.main]]
+  name = "Twitter"
+  icon = "icon-twitter"
+  url = "https://twitter.com/VisaLimbo"
+  weight = -5
+
+[[params.socialIcons]]
+  icon = "fa-linkedin"
+  title = "Linkedin"
+  url = "#"
 
 [taxonomies]
 
