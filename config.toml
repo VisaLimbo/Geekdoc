@@ -15,12 +15,21 @@ unsafe = true
   schemas = []
   page_schemas = []
   seo = []
+  favicon = "favicon.ico"  # path to a .ico to use as favicon
+  logo = ""  # url or path to a logo to put in the header
+  
+  [[params.socialIcons]]
+    icon = "fab fa-twitter"
+    title = "Twitter"
+    url = "https://twitter.com/"
+    weight = 10
 
 [[menu.main]]
   name = "Twitter"
   icon = "twitter"
   url = "https://twitter.com/VisaLimbo"
   weight = -5
+  
 
 [taxonomies]
 
