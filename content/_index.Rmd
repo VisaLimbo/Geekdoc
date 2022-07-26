@@ -7,11 +7,12 @@ show_social_links: true # specify social accounts in site config
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 library(data.table);library(readxl);library(ggplot2); library(countrycode)
-scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_base_14July.csv')
+scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_25July.csv')
 ```
 ![](https://i.ibb.co/4J4nv22/Dali-4.png){width=100%}
 
-July 15th, 2022
+#July 15th, 2022
+July 25th, 2022
 
 ```{r, echo=F}
 vismn <- function() {
@@ -39,7 +40,9 @@ Longest Waits
 ```{r, echo=FALSE, warning=FALSE, message=F}
 # Scraped Data Stats
 # --------------
-scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_base_14July.csv')
+# scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_base_14July.csv')
+scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_25July.csv')
+
 scpdt_base$X <- NULL
 scpdt_base <- data.table(scpdt_base)
 
