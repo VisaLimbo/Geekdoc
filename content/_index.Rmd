@@ -7,7 +7,12 @@ show_social_links: true # specify social accounts in site config
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 library(data.table);library(readxl);library(ggplot2); library(countrycode)
+library(leaflet); library(rgdal);library(RColorBrewer)
+
+# Data
 scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_25July.csv')
+# scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_base_14July.csv')
+
 ```
 ![](https://i.ibb.co/4J4nv22/Dali-4.png){width=100%}
 
@@ -40,9 +45,6 @@ Longest Waits
 ```{r, echo=FALSE, warning=FALSE, message=F}
 # Scraped Data Stats
 # --------------
-# scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_base_14July.csv')
-scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_25July.csv')
-
 scpdt_base$X <- NULL
 scpdt_base <- data.table(scpdt_base)
 
@@ -121,6 +123,73 @@ ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Emba
 \
 
 
+
+#### Mapping Visitor Visa Delays
+```{r, echo=F}
+# Mapping file
+map <- read_excel('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/embassy_country_map.xlsx')
+map$Sno <- NULL
+
+# Get country name
+scpdt_map <- merge(x=scpdt_base, y=map, by="Embassy")
+scpdt_map <- data.table(scpdt_map)
+
+# Aggregate data by countries
+scpdt_map_cty <- scpdt_map[,.(VisitorVisa = mean(VisitorVisa, na.rm=T), 
+                           Student_ExchangeVisitorVisas=mean(Student_ExchangeVisitorVisas, na.rm=T),
+                           AllOtherNonimmigrantVisas=mean(AllOtherNonimmigrantVisas,na.rm=T)), 
+                        by = .(Country, date)]
+
+# Read this shape file with the rgdal library. 
+world_spdf <- readOGR( 
+  dsn= "/Users/moonlight/Documents/Moonlight Projects/Shapefiles/world_shape_file" , 
+  layer="TM_WORLD_BORDERS_SIMPL-0.3",
+  verbose=FALSE
+)
+
+# Map the Lag Data on the shapefile
+world_visa <- merge(x=world_spdf, y=scpdt_map_cty, by.x="ISO3", by.y="Country")
+
+# Map Main
+# ---------------------------------------
+# Create a color palette with handmade bins.
+mybins <- c(0,10,20,50,100,500,Inf)
+mypalette <- colorBin( palette="YlOrBr", domain=world_visa@data$VisitorVisa, 
+                       na.color="transparent", bins=mybins)
+
+# Prepare the text for tooltips:
+mytext <- paste(
+  "Country: ", world_visa@data$NAME,"<br/>", 
+  "Area: ", world_visa@data$AREA, "<br/>", 
+  "VisitorVisa Lag: ", round(world_visa@data$VisitorVisa, 0), 
+  sep="") %>%
+  lapply(htmltools::HTML)
+
+# Final Map
+m <- leaflet(world_visa) %>% 
+  addTiles()  %>% 
+  setView( lat=10, lng=0 , zoom=2) %>%
+  addPolygons( 
+    fillColor = ~mypalette(VisitorVisa), 
+    stroke=TRUE, 
+    fillOpacity = 0.9, 
+    color="white", 
+    weight=0.3,
+    label = mytext,
+    labelOptions = labelOptions( 
+      style = list("font-weight" = "normal", padding = "3px 8px"), 
+      textsize = "13px", 
+      direction = "auto"
+    )
+  ) %>%
+  addLegend( pal=mypalette, values=~VisitorVisa, 
+             opacity=0.9, title = "Visitor Visa Delay", position = "bottomleft" )
+
+m  
+```
+\
+\
+\
 
 Questions?\
 Contact: visalimbo@gmail.com\
