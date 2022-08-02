@@ -157,7 +157,7 @@ world_visa <- merge(x=world_spdf, y=scpdt_map_cty, by.x="ISO3", by.y="Country")
 # Map Main
 # ---------------------------------------
 # Create a color palette with handmade bins.
-mybins <- c(0,10,20,50,100,500,Inf)
+mybins <- c(0,30,60,90,364,Inf)
 mypalette <- colorBin( palette="YlOrBr", domain=world_visa@data$VisitorVisa, 
                        na.color="transparent", bins=mybins)
 
