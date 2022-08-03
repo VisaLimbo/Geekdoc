@@ -128,7 +128,7 @@ ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Emba
 
 
 
-#### Mapping Visitor Visa Delays
+#### Mapping Visitor Visa Appointment Wait Times
 ```{r, echo=F}
 # Mapping file
 map <- read_excel('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/embassy_country_map.xlsx')
