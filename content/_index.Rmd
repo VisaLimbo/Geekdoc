@@ -58,7 +58,7 @@ scpdt_base <- data.table(scpdt_base)
 # Visitor Visa more than one year
 ggplot(scpdt_base[scpdt_base$VisitorVisa>400,], aes(y=reorder(Embassy,VisitorVisa), 
                                                   x=VisitorVisa)) +
-  geom_bar(fill='red',stat='identity') +  
+  geom_bar(fill='#de425b',stat='identity') +  
   theme_minimal() + xlab('days') +
   theme(axis.text=element_text(size=rel(0.7)),
         axis.title.y = element_blank())
@@ -87,7 +87,7 @@ Longest Waits
 # Visitor Visa more than one year
 ggplot(scpdt_base[scpdt_base$Student_ExchangeVisitorVisas>60,], aes(y=reorder(Embassy,Student_ExchangeVisitorVisas), 
                                                   x=Student_ExchangeVisitorVisas)) +
-  geom_bar(fill='darkgreen',stat='identity') +   
+  geom_bar(fill='#91b282',stat='identity') +   
   theme_minimal() + ylab('') + xlab('days') +
   theme(axis.text=element_text(size=rel(0.7)),
         axis.title.y = element_blank())
@@ -116,7 +116,7 @@ Longest Waits
 # Visitor Visa more than one year
 ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Embassy,AllOtherNonimmigrantVisas), 
                                                   x=AllOtherNonimmigrantVisas)) +
-  geom_bar(fill='darkblue',stat='identity') +   
+  geom_bar(fill='#e29195',stat='identity') +   
   theme_minimal() + ylab('') + xlab('days') +
   theme(axis.text=element_text(size=rel(0.7)),
         axis.title.y = element_blank())
@@ -158,14 +158,19 @@ world_visa <- merge(x=world_spdf, y=scpdt_map_cty, by.x="ISO3", by.y="Country")
 # ---------------------------------------
 # Create a color palette with handmade bins.
 mybins <- c(0,30,60,90,364,Inf)
-mypalette <- colorBin( palette="YlOrBr", domain=world_visa@data$VisitorVisa, 
+# mypalette <- colorBin( palette="YlOrBr", domain=world_visa@data$VisitorVisa, 
+#                        na.color="transparent", bins=mybins)
+
+grredcols <- c("#488f31", "#9fc08f", "#f1f1f1", "#ec9c9d", "#de425b")
+mypalette <- colorBin( palette=grredcols, domain=world_visa@data$VisitorVisa, 
                        na.color="transparent", bins=mybins)
 
 # Prepare the text for tooltips:
 mytext <- paste(
   "Country: ", world_visa@data$NAME,"<br/>", 
-  "Area: ", world_visa@data$AREA, "<br/>", 
-  "VisitorVisa Lag: ", round(world_visa@data$VisitorVisa, 0), 
+  "VisitorVisa Lag: ", round(world_visa@data$VisitorVisa, 0), "<br/>", 
+  "StudentVisa Lag: ", round(world_visa@data$Student_ExchangeVisitorVisas, 0), "<br/>", 
+  "AllOtherVisa Lag: ", round(world_visa@data$AllOtherNonimmigrantVisas, 0), "<br/>", 
   sep="") %>%
   lapply(htmltools::HTML)
 
