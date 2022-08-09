@@ -57,7 +57,7 @@ scpdt_base <- data.table(scpdt_base)
 # Charts for all visa types separately
 # ----------------------------------------
 # Visitor Visa more than one year
-ggplot(scpdt_base[scpdt_base$VisitorVisa>400,], aes(y=reorder(Embassy,VisitorVisa), 
+ggplot(scpdt_base[scpdt_base$VisitorVisa>450,], aes(y=reorder(Embassy,VisitorVisa), 
                                                   x=VisitorVisa)) +
   geom_bar(fill='#de425b',stat='identity') +  
   theme_minimal() + xlab('days') +
@@ -88,7 +88,7 @@ Longest Waits
 # Visitor Visa more than one year
 ggplot(scpdt_base[scpdt_base$Student_ExchangeVisitorVisas>60,], aes(y=reorder(Embassy,Student_ExchangeVisitorVisas), 
                                                   x=Student_ExchangeVisitorVisas)) +
-  geom_bar(fill='#91b282',stat='identity') +   
+  geom_bar(fill='#488f31',stat='identity') +   
   theme_minimal() + ylab('') + xlab('days') +
   theme(axis.text=element_text(size=rel(0.7)),
         axis.title.y = element_blank())
@@ -117,7 +117,7 @@ Longest Waits
 # Visitor Visa more than one year
 ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Embassy,AllOtherNonimmigrantVisas), 
                                                   x=AllOtherNonimmigrantVisas)) +
-  geom_bar(fill='#e29195',stat='identity') +   
+  geom_bar(fill='#f48b61',stat='identity') +   
   theme_minimal() + ylab('') + xlab('days') +
   theme(axis.text=element_text(size=rel(0.7)),
         axis.title.y = element_blank())
