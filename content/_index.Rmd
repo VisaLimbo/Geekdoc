@@ -10,8 +10,9 @@ library(data.table);library(readxl);library(ggplot2); library(countrycode)
 library(leaflet); library(rgdal);library(RColorBrewer)
 
 # Data
-scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_1aug.csv')
+scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_8aug.csv')
 
+# scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_1aug.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_25July.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_base_14July.csv')
 
@@ -161,7 +162,7 @@ mybins <- c(0,30,60,90,364,Inf)
 # mypalette <- colorBin( palette="YlOrBr", domain=world_visa@data$VisitorVisa, 
 #                        na.color="transparent", bins=mybins)
 
-grredcols <- c("#488f31", "#9fc08f", "#f1f1f1", "#ec9c9d", "#de425b")
+grredcols <- c("#488f31", "#adad4e", "#ffcc87", "#f48b61", "#de425b")
 mypalette <- colorBin( palette=grredcols, domain=world_visa@data$VisitorVisa, 
                        na.color="transparent", bins=mybins)
 
@@ -177,7 +178,7 @@ mytext <- paste(
 # Final Map
 m <- leaflet(world_visa) %>% 
   addTiles()  %>% 
-  setView( lat=10, lng=0 , zoom=2) %>%
+  setView( lat=10, lng=0 , zoom=1.5) %>%
   addPolygons( 
     fillColor = ~mypalette(VisitorVisa), 
     stroke=TRUE, 
@@ -187,11 +188,13 @@ m <- leaflet(world_visa) %>%
     label = mytext,
     labelOptions = labelOptions( 
       style = list("font-weight" = "normal", padding = "3px 8px"), 
-      textsize = "13px", 
+      textsize = "12px", 
       direction = "auto"
     )
   ) %>%
-  addLegend( pal=mypalette, values=~VisitorVisa, 
+  addLegend( values=~VisitorVisa, 
+             colors =grredcols,
+             labels = c("0-30", "31-60", "61-90", "91-364", "> 1 year"),
              opacity=0.9, title = "Visitor Visa Delay", position = "bottomleft" )
 
 m  
