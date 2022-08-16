@@ -135,6 +135,7 @@ ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Emba
 # Mapping file
 map <- read_excel('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/embassy_country_map.xlsx')
 map$Sno <- NULL
+map$Country <- ifelse(map$Embassy %in% "Brazzaville","COG",map$Country)
 
 # Get country name
 scpdt_map <- merge(x=scpdt_base, y=map, by="Embassy")
