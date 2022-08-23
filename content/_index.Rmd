@@ -199,7 +199,7 @@ m <- leaflet(world_visa) %>%
   ) %>%
   addLegend( values=~VisitorVisa, 
              colors =grredcols,
-             labels = c("0-30", "31-60", "61-90", "91-364", "> 1 year"),
+             labels = c("0-30 days", "31-60 days", "61-90 days", "91-364 days", "> 1 year"),
              opacity=0.9, title = "Visitor Visa Delay", position = "bottomleft" )
 
 m  
