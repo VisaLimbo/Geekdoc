@@ -10,9 +10,10 @@ library(data.table);library(readxl);library(ggplot2); library(countrycode)
 library(leaflet); library(rgdal);library(RColorBrewer)
 
 # Data
-scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_29aug.csv')
+scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_6sep.csv')
 
 
+# scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_29aug.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_22aug.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_15aug.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_8aug.csv')
