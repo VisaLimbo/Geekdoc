@@ -10,9 +10,10 @@ library(data.table);library(readxl);library(ggplot2); library(countrycode)
 library(leaflet); library(rgdal);library(RColorBrewer)
 
 # Data
-scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_19sep.csv')
+scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_26sep.csv')
 
 
+# scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_19sep.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_12sep.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_6sep.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_29aug.csv')
@@ -34,7 +35,8 @@ scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa 
 <!-- Aug 29th, 2022 -->
 <!-- Sep 6th, 2022 -->
 <!-- Sep 12th, 2022 -->
-Sep 19th, 2022
+<!-- Sep 19th, 2022 -->
+Sep 26th, 2022
 
 ```{r, echo=F}
 vismn <- function() {
