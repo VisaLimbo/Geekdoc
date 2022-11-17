@@ -10,8 +10,24 @@ library(data.table);library(readxl);library(ggplot2); library(countrycode)
 library(leaflet); library(rgdal);library(RColorBrewer)
 
 # Data
-scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_24oct.csv')
 
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# -------  Different from November onwards  -------
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_14Nov.csv')
+names(scpdt_base)[names(scpdt_base) == "City.Post"] <- "Embassy"
+scpdt_base$date <- "11/14/2022"
+
+# Clean visitor visa name and type
+# scpdt_base$Visitors..B1.B2. <- ifelse(scpdt_base$Visitors..B1.B2. %in% "Emergency Appointments Only","NA")
+# scpdt_base$Visitors..B1.B2. <- ifelse(scpdt_base$Visitors..B1.B2. %in% "Non-Visa Processing Post","NA")
+# scpdt_base$Visitors..B1.B2. <- ifelse(scpdt_base$Visitors..B1.B2. %in% "Temporarily Closed","NA")
+# scpdt_base$Visitors..B1.B2. <- ifelse(scpdt_base$Visitors..B1.B2. %in% "Closed","NA")
+scpdt_base$Visitors..B1.B2. <- as.numeric(scpdt_base$Visitors..B1.B2.)
+
+
+# scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_31oct.csv')
+# scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_24oct.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_17oct.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_10oct.csv')
 # scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa Limbo/Data/Scraped_CleanData/visascraped_03oct.csv')
@@ -43,25 +59,42 @@ scpdt_base <- read.csv('/Users/moonlight/Documents/Moonlight Projects/2022/Visa 
 <!-- Oct 3rd, 2022 -->
 <!-- Oct 10th, 2022 -->
 <!-- Oct 17th, 2022 -->
-Oct 24th, 2022
+<!-- Oct 24th, 2022 -->
+<!-- Oct 31st, 2022 -->
+Nov 14th, 2022
 
 
 ```{r, echo=F}
+# vismn <- function() {
+#   cat(round(mean(scpdt_base$VisitorVisa, na.rm=T),0))
+# }
+# stumn <- function() {
+#   cat(round(mean(scpdt_base$Student_ExchangeVisitorVisas, na.rm=T),0))
+# }
+# nonmn <- function() {
+#   cat(round(mean(scpdt_base$AllOtherNonimmigrantVisas, na.rm=T),0))
+# }
+
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# -------  Different from November onwards  -------
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 vismn <- function() {
-  cat(round(mean(scpdt_base$VisitorVisa, na.rm=T),0))
+  cat(round(mean(scpdt_base$Visitors..B1.B2., na.rm=T),0))
 }
 stumn <- function() {
-  cat(round(mean(scpdt_base$Student_ExchangeVisitorVisas, na.rm=T),0))
+  cat(round(mean(scpdt_base$Student.Exchange.Visitors..F..M..J., na.rm=T),0))
 }
 nonmn <- function() {
-  cat(round(mean(scpdt_base$AllOtherNonimmigrantVisas, na.rm=T),0))
+  cat(round(mean(scpdt_base$Petition.Based.Temporary.Workers..H..L..O..P..Q., na.rm=T),0))
 }
+
 ```
 
 
 
 
-#### Visitor Visa
+<!-- #### Visitor Visa -->
+#### Visitors.B1.B2.
 Average Wait: 
 ```{r  echo=F, results = "asis"}
 vismn()
@@ -79,8 +112,15 @@ scpdt_base <- data.table(scpdt_base)
 # Charts for all visa types separately
 # ----------------------------------------
 # Visitor Visa more than one year
-ggplot(scpdt_base[scpdt_base$VisitorVisa>450,], aes(y=reorder(Embassy,VisitorVisa), 
-                                                  x=VisitorVisa)) +
+# ggplot(scpdt_base[scpdt_base$VisitorVisa>450,], aes(y=reorder(Embassy,VisitorVisa), 
+#                                                   x=VisitorVisa)) +
+#   geom_bar(fill='#de425b',stat='identity') +  
+#   theme_minimal() + xlab('days') +
+#   theme(axis.text=element_text(size=rel(0.7)),
+#         axis.title.y = element_blank())
+
+ggplot(scpdt_base[scpdt_base$Visitors..B1.B2.>450,], aes(y=reorder(Embassy,Visitors..B1.B2.), 
+                                                  x=Visitors..B1.B2.)) +
   geom_bar(fill='#de425b',stat='identity') +  
   theme_minimal() + xlab('days') +
   theme(axis.text=element_text(size=rel(0.7)),
@@ -95,7 +135,8 @@ ggplot(scpdt_base[scpdt_base$VisitorVisa>450,], aes(y=reorder(Embassy,VisitorVis
 
 
 
-#### Student/Exchange Visitor Visas
+<!-- #### Student/Exchange Visitor Visas -->
+#### Student.Exchange.Visitors.F.M.J.
 Average Wait: 
 ```{r  echo=F, results = "asis"}
 stumn()
@@ -108,8 +149,8 @@ Longest Waits
 # Charts for all visa types separately
 # ----------------------------------------
 # Visitor Visa more than one year
-ggplot(scpdt_base[scpdt_base$Student_ExchangeVisitorVisas>60,], aes(y=reorder(Embassy,Student_ExchangeVisitorVisas), 
-                                                  x=Student_ExchangeVisitorVisas)) +
+ggplot(scpdt_base[scpdt_base$Student.Exchange.Visitors..F..M..J.>60,], aes(y=reorder(Embassy,Student.Exchange.Visitors..F..M..J.), 
+                                                  x=Student.Exchange.Visitors..F..M..J.)) +
   geom_bar(fill='#488f31',stat='identity') +   
   theme_minimal() + ylab('') + xlab('days') +
   theme(axis.text=element_text(size=rel(0.7)),
@@ -124,7 +165,8 @@ ggplot(scpdt_base[scpdt_base$Student_ExchangeVisitorVisas>60,], aes(y=reorder(Em
 
 
 
-#### All Other Non-immigrant Visas
+<!-- #### All Other Non-immigrant Visas -->
+#### Petition.Based.Temporary.Workers.H.L.O.P.Q.
 Average Wait: 
 ```{r  echo=F, results = "asis"}
 nonmn()
@@ -137,8 +179,8 @@ Longest Waits
 # Charts for all visa types separately
 # ----------------------------------------
 # Visitor Visa more than one year
-ggplot(scpdt_base[scpdt_base$AllOtherNonimmigrantVisas>100,], aes(y=reorder(Embassy,AllOtherNonimmigrantVisas), 
-                                                  x=AllOtherNonimmigrantVisas)) +
+ggplot(scpdt_base[scpdt_base$Petition.Based.Temporary.Workers..H..L..O..P..Q.>100,], aes(y=reorder(Embassy,Petition.Based.Temporary.Workers..H..L..O..P..Q.), 
+                                                  x=Petition.Based.Temporary.Workers..H..L..O..P..Q.)) +
   geom_bar(fill='#f48b61',stat='identity') +   
   theme_minimal() + ylab('') + xlab('days') +
   theme(axis.text=element_text(size=rel(0.7)),
@@ -163,10 +205,19 @@ scpdt_map <- merge(x=scpdt_base, y=map, by="Embassy")
 scpdt_map <- data.table(scpdt_map)
 
 # Aggregate data by countries
-scpdt_map_cty <- scpdt_map[,.(VisitorVisa = mean(VisitorVisa, na.rm=T), 
-                           Student_ExchangeVisitorVisas=mean(Student_ExchangeVisitorVisas, na.rm=T),
-                           AllOtherNonimmigrantVisas=mean(AllOtherNonimmigrantVisas,na.rm=T)), 
-                        by = .(Country, date)]
+# scpdt_map_cty <- scpdt_map[,.(VisitorVisa = mean(VisitorVisa, na.rm=T), 
+#                            Student_ExchangeVisitorVisas=mean(Student_ExchangeVisitorVisas, na.rm=T),
+#                            AllOtherNonimmigrantVisas=mean(AllOtherNonimmigrantVisas,na.rm=T)), 
+#                         by = .(Country, date)]
+
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# -------  Different from November onwards  -------
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+scpdt_map_cty <- scpdt_map[,.(Visitors..B1.B2. = mean(Visitors..B1.B2., na.rm=T), 
+                              Student.Exchange.Visitors..F..M..J.=mean(Student.Exchange.Visitors..F..M..J., na.rm=T),
+                              Petition.Based.Temporary.Workers..H..L..O..P..Q.=mean(Petition.Based.Temporary.Workers..H..L..O..P..Q.,na.rm=T)), 
+                           by = .(Country, date)]
+
 
 # Read this shape file with the rgdal library. 
 world_spdf <- readOGR( 
@@ -182,19 +233,30 @@ world_visa <- merge(x=world_spdf, y=scpdt_map_cty, by.x="ISO3", by.y="Country")
 # ---------------------------------------
 # Create a color palette with handmade bins.
 mybins <- c(0,30,60,90,364,Inf)
-# mypalette <- colorBin( palette="YlOrBr", domain=world_visa@data$VisitorVisa, 
+grredcols <- c("#488f31", "#adad4e", "#ffcc87", "#f48b61", "#de425b")
+
+# mypalette <- colorBin( palette=grredcols, domain=world_visa@data$VisitorVisa, 
 #                        na.color="transparent", bins=mybins)
 
-grredcols <- c("#488f31", "#adad4e", "#ffcc87", "#f48b61", "#de425b")
-mypalette <- colorBin( palette=grredcols, domain=world_visa@data$VisitorVisa, 
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+# -------  Different from November onwards  -------
+# ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+mypalette <- colorBin( palette=grredcols, domain=world_visa@data$Visitors..B1.B2.,
                        na.color="transparent", bins=mybins)
+
 
 # Prepare the text for tooltips:
 mytext <- paste(
   "Country: ", world_visa@data$NAME,"<br/>", 
-  "VisitorVisa Lag: ", round(world_visa@data$VisitorVisa, 0), "<br/>", 
-  "StudentVisa Lag: ", round(world_visa@data$Student_ExchangeVisitorVisas, 0), "<br/>", 
-  "AllOtherVisa Lag: ", round(world_visa@data$AllOtherNonimmigrantVisas, 0), "<br/>", 
+  # "VisitorVisa Lag: ", round(world_visa@data$VisitorVisa, 0), "<br/>", 
+  # "StudentVisa Lag: ", round(world_visa@data$Student_ExchangeVisitorVisas, 0), "<br/>", 
+  # "AllOtherVisa Lag: ", round(world_visa@data$AllOtherNonimmigrantVisas, 0), "<br/>", 
+  # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  # -------  Different from November onwards  -------
+  # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  "Visitors..B1.B2 Lag: ", round(world_visa@data$Visitors..B1.B2., 0), "<br/>", 
+  "Student.Exchange.Visitors..F.M.J. Lag: ", round(world_visa@data$Student.Exchange.Visitors..F..M..J., 0), "<br/>", 
+  "Petition.Based.Temporary.Workers..H..L.O.P.Q. Lag: ", round(world_visa@data$Petition.Based.Temporary.Workers..H..L..O..P..Q., 0), "<br/>", 
   sep="") %>%
   lapply(htmltools::HTML)
 
@@ -203,7 +265,8 @@ m <- leaflet(world_visa) %>%
   addTiles()  %>% 
   setView( lat=10, lng=0 , zoom=1.5) %>%
   addPolygons( 
-    fillColor = ~mypalette(VisitorVisa), 
+    # fillColor = ~mypalette(VisitorVisa), 
+    fillColor = ~mypalette(Visitors..B1.B2.), 
     stroke=TRUE, 
     fillOpacity = 0.9, 
     color="white", 
